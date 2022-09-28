@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <link th:href="@{/index.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    
+    
+   
+    <div class="container text-center">
+        <p style="margin-left: 0px; text-align: left">Update journey :  </p>
+        <form th:action="@{/employee/processUpdateJourney/{ID}(ID = ${oldJourney.journey_id})}"
+            method="put" style="max-width: 600px; margin-top: 50px;">
+            
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label"  th:text="'Old depart date/time:' + ${oldJourney.depart_time}"></label>
+                        <div class="col-8">
+                            <input type="date" step = "1" th:field="*{newJourneyHelper.depart_d}"  required validate class="form-control">
+                            <input type="time" step = "1" th:field="*{newJourneyHelper.depart_t}"  required validate class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label " th:text="'Old arrival date/time:' + ${oldJourney.arrival_time}"></label>
+                        <div class="col-8">
+                            <input type="date" step = "1" th:field="*{newJourneyHelper.arrival_d}"  required validate class="form-control">
+                            <input type="time" step = "1" th:field="*{newJourneyHelper.arrival_t}"  required validate class="form-control">
+                        </div>
+                    </div>
+                    
+                    
+                    <div>
+                        <a th:href="@{/employee/manageJourneys}" class="btn btn-info">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Update journey date/times!</button> 
+                    </div>
+                </div>
+            
+        </form>
+    </div>
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

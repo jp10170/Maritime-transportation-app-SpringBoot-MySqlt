@@ -1,0 +1,91 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/general.css}" rel="stylesheet type="text/css"" />
+    <link th:href="@{/journey.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    <h1>Journeys:</h1>
+        <div class="container" style="display: flex; margin-left: 200px">
+            <table cellpadding="0" cellspacing="0" border="0">
+                    <thead class="tbl-header">
+                      <tr>
+                        <th>Route name:</th>
+                        <th>Ship name:</th>
+                        <th>Ship type:</th>
+                        <th>Depart time:</th>
+                        <th>Arrival time:</th>
+                        <th>Action</th>
+                    </thead>
+
+                    <th:block th:each="journey : ${journeys}" >
+                        <tbody class="tbl-content">
+                            <td th:text="${journey.route.route_name}">Route name</td>
+                            <td th:text="${journey.ship.ship_name}">Ship name</td>
+                            <td th:text="${journey.ship.ship_type.type_name}">Ship type</td>
+                            <td th:text="${journey.depart_time}">Depart time</td>
+                            <td th:text="${journey.arrival_time}">Arrival time</td>
+                            <td><a th:href="@{http://localhost:8080/employee/updateJourney/{ID}(ID = ${journey.journey_id})}" class="btn btn-primary">Update</a>
+                                <a th:href="@{http://localhost:8080/employee/deleteJourney/{ID}(ID = ${journey.journey_id})}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tbody>
+                    </th:block>        
+            </table>
+            
+            <div class="container text-center" style="flex-grow: 4"; width = "1000px">
+                
+                <form th:action="@{/employee/processAddJourney}" 
+                    method="post" style="max-width: 600px; margin: 0 auto;">
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Route: </label>
+                        <select th:field="*{newJourney.route}" class="form-control" required>
+                            <th:block th:each="route : ${routes}" >
+                                <option th:text = "${route.route_name}" th:value ="${route.route_id}"/>
+                            </th:block>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Ship: </label>
+                        <select th:field="*{newJourney.ship}" class="form-control" required>
+                            <th:block th:each="ship : ${ships}" >
+                                <option th:text = "${ship.ship_name}" th:value ="${ship.ship_id}"/>
+                            </th:block>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Depart date/time: </label>
+                        <div class="col-8">
+                            <input type="date" step = "1" th:field="*{newJourneyHelper.depart_d}"  required validate class="form-control">
+                            <input type="time" step = "1" th:field="*{newJourneyHelper.depart_t}"  required validate class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Arrival date/time: </label>
+                        <div class="col-8">
+                            <input type="date" step = "1" th:field="*{newJourneyHelper.arrival_d}"  required validate class="form-control">
+                            <input type="time" step = "1" th:field="*{newJourneyHelper.arrival_t}"  required validate class="form-control">
+                        </div>
+                    </div>
+                    
+                    
+                    <div>
+                        <button type="submit" class="btn btn-primary">Add journey!</button> 
+                    </div>
+                </div>
+                </form>
+                
+            </div>  
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

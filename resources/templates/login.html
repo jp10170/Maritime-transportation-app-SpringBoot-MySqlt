@@ -1,0 +1,36 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/index.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />  
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+        <form th:action="@{/login}" 
+            method="post" style="max-width: 600px; margin: 0 auto;">
+            <p>Enter your account details:</p>
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-4 col-form-label">E-mail: </label>
+                <div class="col-8">
+                    <input type="text" name="username" class="form-control" placeholder="e-mail"/>
+                </div>
+            </div>
+             
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Password: </label>
+                <div class="col-8">
+                    <input type="password" name="password" class="form-control" placeholder="password"/>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 400px">Sign In</button>
+            </div>
+        </div>
+</body>
+
+<footer>
+  <p>If you don't have an account please register:<br>
+  <a href="http://localhost:8080/register" style="color: #007bff">Registration!</a></p>
+</footer>

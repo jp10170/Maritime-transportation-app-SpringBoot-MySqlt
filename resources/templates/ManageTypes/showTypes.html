@@ -1,0 +1,48 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/general.css}" rel="stylesheet type="text/css"" />
+    <link th:href="@{/tableUsers.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+
+<body>
+        <h2 align="left" style = "color: white; margin-left: 100px"  >Ship types:</h2>
+        <table cellpadding="0" cellspacing="0" border="0" style = "margin-left: 100px">
+            <thead class="tbl-header">
+                <tr>
+                    <th>Type name:</th>
+                    <th>Total seats:</th>
+                    <th>Total deck:</th>
+                    <th>Total cabins:</th>
+                    <th>Seat price:</th>
+                    <th>Deck price:</th>
+                    <th>Cabin price:</th>
+                    <th>Action</th>
+            </thead>
+            <th:block th:each="type : ${types}" >
+                <tbody class="tbl-content">
+                    <td th:text="${type.type_name}">Type name</td>
+                    <td th:text="${type.total_seats}">Total seats</td>
+                    <td th:text="${type.total_deck}">Total deck</td>
+                    <td th:text="${type.total_cabins}">Total cabins</td>
+                    <td th:text="${type.seat_price}">Seat price</td>
+                    <td th:text="${type.deck_price}">Deck price</td>
+                    <td th:text="${type.cabin_price}">Cabin price</td>
+                    <td>
+                        <a th:href="@{/employee/changePrices/{ID}(ID = ${type.ship_type_id})}" class="btn btn-primary">Change prices</a>          
+                    </td>
+                    </div>
+                </tbody>
+            </th:block>        
+        </table>
+    </div>
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

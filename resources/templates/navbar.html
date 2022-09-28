@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NavigationBar</title>
+
+</head>
+
+<body>
+    <nav th:fragment="navbar" nav class="navbar navbar-light" style="background-color: whitesmoke;">       
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                <img src="http://localhost:8080/IMG_9852.jpeg" width="50" height="40" alt="">
+                </a>
+            </div>
+            <ul class="nav">
+                <div sec:authorize="isAnonymous()">
+                    <li><a class="nav-link" th:href="@{http://localhost:8080/login}" >Login</a></li>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <li><a class="nav-link" th:href="@{http://localhost:8080/logout}">Logout</a></li>
+                </div>
+                    <li><a class="nav-link" th:href="@{http://localhost:8080/index}">Home</a></li>
+                    
+                <div sec:authorize="hasAnyAuthority('SuperAdmin','Admin','Employee','User')">
+                    <li><a class="nav-link" th:href="@{/journeys}">Journeys</a></li>   
+                </div>
+                <div sec:authorize="isAnonymous()">
+                    <li><a class="nav-link" th:href="@{/journeys}">Journeys</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('SuperAdmin','Admin','Employee','User')">
+                    <li><a class="nav-link" th:href="@{/user/myTickets}">My Tickets</a></li>   
+                </div>
+                <div sec:authorize="hasAnyAuthority('SuperAdmin','Admin','Employee')">
+                    <li><a class="nav-link" th:href="@{/employee/manageJourneys}">Manage journeys</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('SuperAdmin','Admin','Employee')">
+                    <li><a class="nav-link" th:href="@{/employee/routes}">Manage routes</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('SuperAdmin','Admin','Employee')">
+                    <li><a class="nav-link" th:href="@{/employee/manageShips}">Manage ships</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('SuperAdmin','Admin','Employee')">
+                    <li><a class="nav-link" th:href="@{/employee/manageTypes}">Manage ship types</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('SuperAdmin','Admin')">
+                    <li><a class="nav-link" th:href="@{/employee/manageUsers}">Manage all users</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('Employee')">
+                    <li><a class="nav-link" th:href="@{/employee/manageUsers}">All users</a></li>
+                </div>
+                <div sec:authorize="hasAnyAuthority('SuperAdmin','Admin','Employee','User')">
+                    <li><a class="nav-link" th:href="@{/user/myProfile}">My profile</a></li>
+                </div>
+            </ul>
+        </div>  
+    </nav>
+</body>
+</html>
+
+<style>
+    .nav li {
+        display:inline-block;
+    }
+</style>

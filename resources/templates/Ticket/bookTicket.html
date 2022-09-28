@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <link th:href="@{/index.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    
+    <span th:if="${journey.total_available > 0 }">
+        
+        <div class="container text-center">
+            <p style="margin-left: 0px; text-align: left; size: 20px; color: white">Select accommodation type :  </p>
+            <form th:action="@{/user/processBookTicket/{ID}(ID = ${journey.journey_id})}"
+                method="post" style="max-width: 600px; margin-top: 50px;">
+                        <span th:if="${journey.available_cabins> 0 }">
+                            <p th:text = "'Cabin price: ' + ${ticketHelper.accomodations_price.get('Cabin')}"></p>
+                        </span>
+                        <span th:if="${journey.available_seats > 0 }">
+                            <p th:text = "'Seat price: ' + ${ticketHelper.accomodations_price.get('Seat')}"></p>
+                        </span>
+                        <span th:if="${journey.available_deck > 0 }">
+                            <p th:text = "'Deck price: ' + ${ticketHelper.accomodations_price.get('Deck')}"></p>
+                        </span>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">Accommodation type: </label>
+                            <select th:field="*{ticket.accomodation_type}" class="form-control" required>
+                                    <option th:if="${journey.available_cabins > 0 }" th:text = "Cabin" th:value ="Cabin"/>
+                                    <option th:if="${journey.available_seats > 0 }" th:text = "Seat" th:value ="Seat"/>
+                                    <option th:if="${journey.available_deck > 0 }" th:text = "Deck" th:value ="Deck"/>
+                            </select>                           
+                        </div>                   
+                        <div>
+                            <a th:href="@{/journeys}" class="btn btn-info">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Book a ticket!</button> 
+                        </div>
+            </form> 
+        </div>
+    </span>
+    <span th:if="${journey.total_available = 0 }">
+        <p>All tickets have been sold out!!</p>
+    </span>
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

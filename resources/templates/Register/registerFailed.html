@@ -1,0 +1,51 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/index.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    
+    <div class="container text-center">
+        <form th:action="@{/process_register}" th:object="${user}"
+            method="post" style="max-width: 600px; margin: 0 auto;">
+            <p style="color: red">This e-mail all ready exists, please use another e-mail!</p>
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-4 col-form-label">E-mail: </label>
+                <div class="col-8">
+                    <input type="email" th:field="*{email}" class="form-control" required />
+                </div>
+            </div>
+             
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Password: </label>
+                <div class="col-8">
+                    <input type="password" th:field="*{password}" class="form-control"
+                            required minlength="6" maxlength="10"/>
+                </div>
+            </div>
+             
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Name: </label>
+                <div class="col-8">
+                    <input type="text" th:field="*{name}" class="form-control"
+                            required minlength="2" maxlength="20"/>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+        </div>
+        </form>
+    </div>
+
+</body>
+
+<footer>
+  <p>If you don't have an account please register:<br>
+  <a href="http://localhost:8080/register" style="color: #007bff">Registration!</a></p>
+</footer>

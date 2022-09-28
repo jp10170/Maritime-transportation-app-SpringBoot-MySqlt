@@ -1,0 +1,69 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:href="@{/showTicket.css}" rel="stylesheet type="text/css"" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    <div class="container" style = " background-color: aliceblue; ">
+        <h1 style="margin-top: 30px;">Ticket details:</h1>
+        <div class="leftside">
+            <div>
+                <p>Route name: </p>
+                <textarea th:text="${ticket.journey.route.route_name}" style="border:outset 4px blue; text-align: center; height: 40px;">     
+                </textarea>
+            </div>
+            
+        </div>
+        <div class="rightside">
+            <div style="margin-top: 70px">
+                <p>Ship name: </p>
+                <textarea th:text="${ticket.journey.ship.ship_name}" style="border:outset 4px blue; text-align: center; height: 40px">     
+                </textarea>
+            </div>
+            <div>
+                <p>Ship type: </p>
+                <textarea th:text="${ticket.journey.ship.ship_type.type_name}" style="border:outset 4px blue; text-align: center; height: 40px;">     
+                </textarea>
+            </div>
+            <div>
+                <p>Accommodation type: </p>
+                <textarea th:text="${ticket.accomodation_type}" style="border:outset 4px blue; text-align: center; height: 40px;">     
+                </textarea>
+            </div>
+            <div>
+                <p>Accommodation number: </p>
+                <textarea th:text="${ticket.accommodation_number}" style="border:outset 4px blue; text-align: center; height: 40px;">     
+                </textarea>
+            </div>
+            
+        </div>
+        <div class="bottom" style = "background-color: lightblue">
+            <div style = "margin-left: 30px; margin-top: 60px;">
+                <p>Depart time: </p>
+                <textarea th:text="${ticket.journey.depart_time}" style="border:outset 4px blue; text-align: center; height: 40px;">     
+                </textarea>
+            </div>
+            <div style = "margin-left: 30px;">
+                <p>Arrival time: </p>
+                <textarea th:text="${ticket.journey.arrival_time}" style="border:outset 4px blue; text-align: center; height: 40px;">     
+                </textarea>
+            </div>
+            <div style = "margin-left: 30px;">
+                <p>Ticket id: </p>
+                <textarea th:text="${ticket.ticket_id}" style="border:outset 4px blue; text-align: center; height: 40px;">     
+                </textarea>
+            </div>
+            <div style = "margin-left: 30px;">
+                <p>Ticket price: </p>
+                <textarea th:text="${ticket.ticket_price}" style="border:outset 4px blue; text-align: center; height: 40px;">     
+                </textarea>
+            </div>
+        </div>
+    </div>
+</body>
+
+</div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <link th:href="@{/index.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    
+    
+    
+    <div class="container text-center">
+        <p>Update route  <td th:text="${oldRoute.route_name}"></td> : </p>
+        <form th:action="@{/employee/processUpdateRoute/{ID}(ID = ${oldRoute.route_id})}" th:object="${newRoute}"
+            method="put" style="max-width: 600px; margin: 0 auto;">
+            <p style="color: red"> Route destination is invalid or allready exists!!! </p>
+            <div class="form-group row">
+                        <label class="col-4 col-form-label">Route starting point: </label>
+                        <select th:field="*{Start}" class="form-control" required>
+                            <th:block th:each="city : ${citys}" >
+                                <option th:text = "${city.city_name}" th:value ="${city.city_name}"/>
+                            </th:block>
+                        </select>
+                    </div>
+                    
+                    <div class="m-3">
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Route destination: </label>
+                        <select th:field="*{Destination}" class="form-control" required>
+                            <th:block th:each="city : ${citys}" >
+                                <option th:text = "${city.city_name}" th:value ="${city.city_name}"/>
+                            </th:block>
+                        </select>
+                    </div>
+             
+            <div class="form-group row">
+                <label class="col-4 col-form-label">New route price (Kn): </label>
+                <div class="col-8">
+                    <input type="number" min="0" th:field="*{Route_price}" th:placeholder = "${oldRoute.route_price}" required class="form-control">
+                </div>
+            </div>
+            <div>
+                <a th:href="@{/employee/routes}" class="btn btn-info">Cancel</a>
+                <button type="submit" class="btn btn-primary">Update route!</button> 
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

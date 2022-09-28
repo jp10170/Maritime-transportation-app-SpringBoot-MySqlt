@@ -1,0 +1,52 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/general.css}" rel="stylesheet type="text/css"" />
+    <link th:href="@{/tableUsers.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+
+<body>
+    <div class="container su">
+        <h2 align="left" style = "color: white" >Your tickets:</h2>
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead class="tbl-header">
+                <tr>
+                    <th>Route name:</th>
+                    <th>Ship name:</th>
+                    <th>Ship type:</th>
+                    <th>Depart time:</th>
+                    <th>Arrival time:</th>
+                    <th>Accommodation type:</th>
+                    <th>Accommodation number:</th>
+                    <th>Ticket price:</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <th:block th:each="ticket : ${myTickets}" >
+                <tbody class="tbl-content">
+                    <td th:text="${ticket.journey.route.route_name}">Route name</td>
+                    <td th:text="${ticket.journey.ship.ship_name}">Ship name</td>
+                    <td th:text="${ticket.journey.ship.ship_type.type_name}">Ship type</td>
+                    <td th:text="${ticket.journey.depart_time}">Depart time</td>
+                    <td th:text="${ticket.journey.arrival_time}">Arrival time</td>
+                    <td th:text="${ticket.accomodation_type}">Accommodation type</td>
+                    <td th:text="${ticket.accommodation_number}">Accommodation number</td>
+                    <td th:text="${ticket.ticket_price}">Ticket price</td>
+                    <td>
+                        <a th:href="@{/user/deleteTicket/{ID}(ID = ${ticket.ticket_id})}" class="btn btn-danger">Cancel reservation</a>
+                        <a th:href="@{/user/showTicket/{ID}(ID = ${ticket.ticket_id})}" class="btn btn-primary">Show ticket</a>
+                    </td>
+                </tbody>
+            </th:block>        
+        </table>
+    </div>
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

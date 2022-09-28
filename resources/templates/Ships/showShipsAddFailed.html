@@ -1,0 +1,66 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/general.css}" rel="stylesheet type="text/css"" />
+    <link th:href="@{/tables.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<header></header>
+<body>
+        <h1>Ships:</h1>
+        <div class="container" style="display: flex;">
+            
+            <table cellpadding="0" cellspacing="0" border="0">
+                    <thead class="tbl-header">
+                      <tr>
+                        <th>Ship name:</th>
+                        <th>Ship type:</th>
+                        <th>Action:</th>
+                    </thead>
+
+                    <th:block th:each="ship : ${ships}" >
+                        <tbody class="tbl-content">
+                            <td th:text="${ship.ship_name}">Ship name</td>
+                            <td th:text="${ship.ship_type.type_name}">Ship type</td>
+                            <td><a th:href="@{http://localhost:8080/employee/deleteShip/{ID}(ID = ${ship.ship_id})}" class="btn btn-danger">Delete</a>
+                        </tbody>
+                    </th:block>        
+            </table>
+        
+            <div class="container text-center" style="flex-grow: 4"; width = "1000px">
+                <p1 style ="color: red">Add ship : ---> SHIP NAME EXISTS!!!</p1>
+                <form th:action="@{/employee/processAddShip}" th:object="${newShip}"
+                    method="post" style="max-width: 600px; margin: 0 auto;">
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Ship type: </label>
+                        <select th:field="*{ship_type}" class="form-control" required>
+                            <th:block th:each="type : ${types}" >
+                                <option th:text = "${type.type_name}" th:value ="${type.ship_type_id}"/>
+                            </th:block>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Ship name: </label>
+                        <div class="col-8">
+                            <input type="text" th:field="*{ship_name}"  required class="form-control">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Add Ship!</button> 
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+   
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>

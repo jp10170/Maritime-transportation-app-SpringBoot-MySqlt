@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link th:href="@{/index.css}" rel="stylesheet type="text/css"" />
+        <link th:href="@{/profile.css}" rel="stylesheet type="text/css"" />
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />   
+        <div th:insert="navbar :: navbar">  </div>
+    </head>
+    
+    <body>
+        <div class="center-1">
+            <p1>Here u can see your profile details and/or update them:</p1>
+        </div>
+        <div class="center-2">
+            <p2>Your name:    <td th:text="${user.name}" style = "color: black"></p2>
+        </div>
+        <div class="center-3">
+            <p3>Your E-mail:   <td th:text="${user.email}" style = "color: black"></p3>
+        </div>
+        <div class="center-4">
+            <a href="/user/updateProfile" style="color: black">Update your profile name and e-mail!</a>
+            <a href="/user/resetPassword" style="color: white">Reset password!</a>
+            <a href="/user/deleteMyAcco" style="color: red">Delete account!</a>      
+        </div>  
+        
+         
+    </body>
+    
+    
+    
+    <footer>
+        <div sec:authorize="isAuthenticated()">
+            <p>For any questions contact our support:<br>
+            <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>                  
+        </div>
+    </footer>
+</html>

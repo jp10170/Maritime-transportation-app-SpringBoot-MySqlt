@@ -1,0 +1,24 @@
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Marina Zadar</title>
+    <link th:href="@{/index.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    
+</body>
+
+<footer>
+    <div sec:authorize="isAnonymous()">
+        <p>If you don't have an account please register:<br>
+        <a href="http://localhost:8080/register" style="color: #007bff">Registration!</a></p>                  
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <p>For any questions contact our support:<br>
+        <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>                  
+    </div>
+</footer>

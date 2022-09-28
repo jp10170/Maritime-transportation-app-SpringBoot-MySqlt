@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <link th:href="@{/index.css}" rel="stylesheet type="text/css"" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <div th:insert="navbar :: navbar">  </div>
+</head>
+<body>
+    
+    
+   
+    <div class="container text-center">
+        <p>Update prices of  <td th:text="${type.type_name}"></td> : </p>
+        <form th:action="@{/employee/processChangePrices/{ID}(ID = ${type.ship_type_id})}" th:object="${newType}"
+            method="put" style="max-width: 600px; margin: 0 auto;">
+            <span th:if="${type.total_seats > 0 }">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label">Seats price: </label>
+                    <input type="number" min="0" th:field="*{seat_price}" th:placeholder = "${type.seat_price}" required class="form-control">
+                </div>
+            </span>
+            
+            <span th:if="${type.total_deck > 0 }">
+                <div class="m-3">
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Deck price: </label>
+                        <input type="number" min="0" th:field="*{deck_price}" th:placeholder = "${type.deck_price}" required class="form-control">
+                    </div>
+                </div>
+            </span>
+            
+            <span th:if="${type.total_cabins > 0 }">
+                <div class="m-3">
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Cabin price: </label>
+                        <input type="number" min="0" th:field="*{cabin_price}" th:placeholder = "${type.cabin_price}" required class="form-control">
+                    </div>
+                </div>  
+            </span>
+            <div>
+                <a th:href="@{/employee/manageTypes}" class="btn btn-info">Cancel</a>
+                <button type="submit" class="btn btn-primary">Update prices!</button> 
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+<footer>
+  <p>For any questions contact our support:<br>
+  <a href="mailto:support@gmail.com" style="color: #007bff">Support e-mail!</a></p>
+</footer>
+</html>
